@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * 模拟 zookeeper 用作配置中心
+ * 模拟 zookeeper 获取配置的操作
  */
 public class Main {
 
@@ -43,11 +43,6 @@ public class Main {
                 w.await();
             } else {
                 System.out.println("conf: " + conf.getConfStr());
-            }
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
         }
     }

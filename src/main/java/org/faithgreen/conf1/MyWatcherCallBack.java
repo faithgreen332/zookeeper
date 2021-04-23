@@ -63,6 +63,7 @@ public class MyWatcherCallBack implements Watcher, AsyncCallback.DataCallback, A
                 zk.getData("/appConf", this, this, "ooo");
                 break;
             case NodeDeleted:
+                config.setConfStr("");
                 latch = new CountDownLatch(1);
                 break;
             case NodeDataChanged:

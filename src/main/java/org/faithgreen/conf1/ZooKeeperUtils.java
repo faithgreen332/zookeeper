@@ -8,7 +8,7 @@ import java.util.concurrent.CountDownLatch;
 public class ZooKeeperUtils {
 
     static ZooKeeper zk;
-    final static String address = "192.168.172.3:2181,192.168.172.4:2181,192.168.172.5:2181,192.168.172.6:2181/testConf";
+    final static String address = "192.168.172.3:2181,192.168.172.4:2181,192.168.172.5:2181,192.168.172.6:2181/testLock";
     static CountDownLatch latch = new CountDownLatch(1);
     static DefaultWatcher defaultWatcher = new DefaultWatcher();
 

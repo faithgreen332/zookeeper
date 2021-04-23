@@ -5,6 +5,9 @@ import org.apache.zookeeper.Watcher;
 
 import java.util.concurrent.CountDownLatch;
 
+/**
+ * 默认基于 session 的事件，只用来阻塞主线程，让 zookeeper 连接成功后再继续运行
+ */
 public class DefaultWatcher implements Watcher {
 
     CountDownLatch c;

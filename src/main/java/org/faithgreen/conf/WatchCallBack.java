@@ -8,6 +8,9 @@ import org.apache.zookeeper.data.Stat;
 
 import java.util.concurrent.CountDownLatch;
 
+/**
+ * 注册了节点的事件和回调
+ */
 public class WatchCallBack implements Watcher, AsyncCallback.DataCallback, AsyncCallback.StatCallback {
 
     ZooKeeper zk;
@@ -41,6 +44,7 @@ public class WatchCallBack implements Watcher, AsyncCallback.DataCallback, Async
     public void await() {
         zk.exists("/appConf", this, this, "abc");
         try {
+            // 让主线程阻塞住，上面那行代码运行下去
             cc.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -94,9 +98,9 @@ public class WatchCallBack implements Watcher, AsyncCallback.DataCallback, Async
         if (bytes != null) {
             String s1 = new String(bytes);
             conf.setConfStr(s1);
+            // 取到数据了，让主线程继续往下走
             cc.countDown();
         }
-        System.out.println("datacallback");
     }
 
     /**
@@ -109,11 +113,8 @@ public class WatchCallBack implements Watcher, AsyncCallback.DataCallback, Async
      */
     @Override
     public void processResult(int i, String s, Object o, Stat stat) {
-        System.out.println("statcallback");
         if (stat != null) {
             zk.getData("/appConf", this, this, "def");
-        } else {
-            System.out.println("stat: " + stat.toString());
         }
     }
 }
